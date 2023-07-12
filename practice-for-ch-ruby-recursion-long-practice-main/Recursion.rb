@@ -26,3 +26,14 @@ end
 
 # p exponent_v2(2, 3) 
 # p exponent_v2(2, 4)
+
+def dup(array)
+    return array if array.all? {|ele| !ele.is_a?(Array)}
+    newarr = []
+    array.each do |subarr|
+        newarr << dup(subarr)
+    end
+
+    newarr
+end
+
