@@ -66,3 +66,16 @@ def fibs_v2(n)
     result
 end
 
+def bsearch(array, target)
+    return nil if arr.empty?
+    mid = array.size / 2
+
+    if array[mid] == target
+        arr.index(target)
+    elsif array[mid] > target
+        bsearch(array[0...mid], target)
+    else
+        right_value = bsearch(array[mid+1..-1], target)
+        right_value == nil ? nil :  right_value + mid + 1
+    end
+end
