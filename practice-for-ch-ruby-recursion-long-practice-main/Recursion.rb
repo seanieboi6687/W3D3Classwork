@@ -5,7 +5,7 @@ end
 
 # p range(1,3) # => [1,2]
 # p range(1,4) # => [1,2,3]
-# p range(1,5) # => [1,2,3,4] 
+# p range(1,5) # => [1,2,3,4]
 # p range(2,7) # => [2,3,4,5,6]
 
 def exponent_v1(num, exp)
@@ -24,7 +24,7 @@ def exponent_v2(num, exp)
     end
 end
 
-# p exponent_v2(2, 3) 
+# p exponent_v2(2, 3)
 # p exponent_v2(2, 4)
 
 def dup(array)
@@ -42,7 +42,7 @@ end
 #     return [0] if n == 1
 #     return [0,1] if n == 2
 #     previous_fibs = fibs(n - 1)
-   
+
 #     (3..n).each do |num|
 #         break if previous_fibs.length >= n
 #         previous_fibs << previous_fibs[-2] + previous_fibs[-1]
@@ -79,3 +79,46 @@ def bsearch(array, target)
         right_value == nil ? nil :  right_value + mid + 1
     end
 end
+
+
+
+def merge_sort(arr)
+    return arr if arr.size <= 1
+    mid = arr.size / 2
+    left = merge_sort(arr[0...mid])
+    right = merge_sort(arr[mid...arr.size])
+    merge(left, right)
+end
+
+def merge(left, right)
+    result = []
+    until left.empty? || right.empty?
+        if left.first < right.first
+            result << left.shift
+        else
+            result << right.shift
+        end
+    end
+    result + left + right
+end
+
+p merge_sort([1, 2, 4,6,3, 2])
+
+
+# def subsets(arr)
+#     return [[]] if arr.empty?
+
+#     subsets(arr[1..-1]).map do |subset|
+#        subsets(arr[1..-1]).map { |sub| subset + [sub] }
+#     end
+
+# end
+
+
+def subsets(arr)
+    return [[]] if arr.empty?
+    subsets(arr[0...-1]) + subsets(arr[0...-1]).map { |sub| sub + [arr[-1]] }
+end
+
+
+p subsets([1, 2, 3, 4])
