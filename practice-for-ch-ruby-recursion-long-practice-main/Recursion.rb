@@ -37,12 +37,32 @@ def dup(array)
     newarr
 end
 
-def fibs(n)
+# def fibs(n)
+#     return [] if n == 0
+#     return [0] if n == 1
+#     return [0,1] if n == 2
+#     previous_fibs = fibs(n - 1)
+   
+#     (3..n).each do |num|
+#         break if previous_fibs.length >= n
+#         previous_fibs << previous_fibs[-2] + previous_fibs[-1]
+#     end
+
+#     previous_fibs
+# end
+
+def fibs_v1(n)
     return [] if n == 0
     return [0] if n == 1
     return [0,1] if n == 2
-    previous_fibs = fibs(n-1)
+    previous_fibs = fibs_v1(n-1)
     previous_fibs << previous_fibs[-2..-1].sum
     previous_fibs
+end
+
+def fibs_v2(n)
+    result = [0,1,1]
+    (0...n-3).each {result << result[-1] + result[-2]}
+    result
 end
 
