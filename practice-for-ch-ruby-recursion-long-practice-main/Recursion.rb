@@ -104,21 +104,53 @@ end
 
 p merge_sort([1, 2, 4,6,3, 2])
 
+#Check out readme for step by step example
+def subsets(array)
+    return [[]] if array.empty?
 
-# def subsets(arr)
-#     return [[]] if arr.empty?
+    # Recursively calculate subsets for the array without the last element
+    remaining_subsets = subsets(array[0...-1])
 
-#     subsets(arr[1..-1]).map do |subset|
-#        subsets(arr[1..-1]).map { |sub| subset + [sub] }
-#     end
+    # Append the last element to each subset in the remaining_subsets
+    subsets_with_last = remaining_subsets.map do |subset|
+      subset + [array.last]
+    end
 
-# end
+    # Combine the remaining_subsets and subsets_with_last
+    all_subsets = remaining_subsets + subsets_with_last
 
+    all_subsets
+  end
 
-def subsets(arr)
-    return [[]] if arr.empty?
-    subsets(arr[0...-1]) + subsets(arr[0...-1]).map { |sub| sub + [arr[-1]] }
-end
 
 
 p subsets([1, 2, 3, 4])
+
+
+def permutations(arr)
+    #Base-case: Return the arr itself if length is less than or equal to 1
+    return [arr] if arr.length <= 1
+
+    #Initialize an empty arr to store permutations
+    result = []
+
+    #loop over each el in the arr
+    arr.each_with_index do |element, index|
+      #create an array of remaining elements by removing the current element
+      remaining_elements = arr[0...index] + arr[index+1..-1]
+
+      # Recursively call permutations on remaining elements
+      remaining_permutations = permutations(remaining_elements)
+
+      # Append the current element to each permutation and add to result
+      remaining_permutations.each do |permutation|
+        result << [element] + permutation
+      end
+    end
+
+    # Return the result array containing all permutations
+    result
+  end
+
+
+  p permutations([1, 2, 3])
